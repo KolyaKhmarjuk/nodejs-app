@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const ctrl = require("../../controllers/contacts/index");
-
 const { addSchema, updateFavoriteSchema } = require("../../models/contacts");
 const { validationBody, isValidId } = require("../../middlewares");
 
