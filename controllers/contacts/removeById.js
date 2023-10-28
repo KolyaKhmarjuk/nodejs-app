@@ -1,20 +1,14 @@
-const contactsOperations = require("../../models/contacts");
+const { Contact } = require("../../models/contacts");
+const { HttpError } = require("../../helpers");
 
 const removeById = async (req, res) => {
 	const { contactId } = req.params;
-	const result = await contactsOperations.removeContact(contactId);
+	const result = await Contact.findByIdAndRemove(contactId);
 	if (!result) {
-		const error = new Error(`Contact with id=${contactId} not found`);
-		error.status = 404;
-		throw error;
+		throw HttpError(404, "Not found");
 	}
-	res.json({
-		status: "success",
-		code: 200,
-		message: "contact deleted",
-		data: {
-			result,
-		},
+	res.status(200).json({
+		message: "Contact deleted",
 	});
 };
 
