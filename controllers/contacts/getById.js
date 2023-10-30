@@ -1,11 +1,12 @@
 const { Contact } = require("../../models/contacts");
-const { HttpError } = require("../../helpers");
 
 const getById = async (req, res) => {
 	const { contactId } = req.params;
 	const contactById = await Contact.findById(contactId);
 	if (!contactById) {
-		throw HttpError(404, "Not found");
+		res.status(400).json({
+			status: `Failure, we didn't find the contact width id=${contactId}`,
+		});
 	}
 	res.json(contactById);
 };
