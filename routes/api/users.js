@@ -13,6 +13,13 @@ router.post(
 	ctrlWrapper(ctrl.singup)
 );
 
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verifyEmail));
+router.post(
+	"/verify",
+	validationBody(schemas.verifyEmail),
+	ctrlWrapper(ctrl.resendVerifyEmail)
+);
+
 // singin
 router.post(
 	"/singin",
